@@ -1,0 +1,21 @@
+
+# Java and Spring Boot
+target/
+*.class
+*.log
+out/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Local credentials and environment files
+.env
+.env.*
+!.env.example
+application-local.properties
+src/main/resources/application.properties
+
+# Operating system
+.DS_Store
+Thumbs.db

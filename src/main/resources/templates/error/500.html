@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    ```
+    <title>Server Error</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .error-container {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 550px;
+            width: 90%;
+        }
+
+        .error-code {
+            font-size: 90px;
+            font-weight: bold;
+            color: #dc2626;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 0 0 15px;
+            color: #1f2937;
+        }
+
+        p {
+            color: #6b7280;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .home-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #111827;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .home-btn:hover {
+            background: #374151;
+        }
+    </style>
+    ```
+
+</head>
+
+<body>
+
+<div class="error-container">
+
+    ```
+    <div class="error-code">500</div>
+
+    <h1>Something Went Wrong</h1>
+
+    <p>
+        Something went wrong on the server.
+        Please try again later.
+    </p>
+
+    <a href="/" class="home-btn">
+        Back to Dashboard
+    </a>
+    ```
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<nav th:fragment="navbar"
+     class="main-navbar">
+
+    <!-- LOGO / PROJECT NAME -->
+
+    <div class="navbar-brand">
+
+        <a href="/">
+            Management System
+        </a>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <div class="navbar-links">
+
+        <a href="/">
+            Dashboard
+        </a>
+
+        <a href="/residents">
+            Residents
+        </a>
+
+        <a href="/staff">
+            Staff
+        </a>
+
+
+        <!-- LOGOUT -->
+
+        <form th:action="@{/logout}"
+              method="post"
+              class="logout-form">
+
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}">
+
+            <button type="submit"
+                    class="logout-btn">
+                Logout
+            </button>
+
+        </form>
+
+    </div>
+
+</nav>
+
+</body>
+</html>

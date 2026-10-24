@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Management</title>
+
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 25px;
+            background: #f4f6f9;
+            color: #222;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+        h1, h2 { color: #243b55; }
+        .panel {
+            background: white;
+            padding: 22px;
+            margin-bottom: 22px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #00000012;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccd2d8;
+            border-radius: 5px;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+        button, .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            background: #2457a7;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .secondary { background: #687582; }
+        .danger { background: #c0392b; }
+        .success-message {
+            background: #d8f3df;
+            color: #17632c;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .error-message {
+            color: #c0392b;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+        .search-form input { flex: 1; }
+        .table-wrapper { overflow-x: auto; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #e1e5e9;
+            text-align: left;
+        }
+        th { background: #edf1f5; }
+        td .btn { margin: 2px; }
+        @media (max-width: 650px) {
+            body { padding: 12px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .search-form { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1>Staff Management</h1>
+
+    <div class="panel">
+        <a class="btn secondary" th:href="@{/}">Dashboard</a>
+        <a class="btn secondary" th:href="@{/residents}">Resident Management</a>
+    </div>
+
+    <div th:if="${successMessage}" class="success-message"
+         th:text="${successMessage}"></div>
+
+    <div class="panel">
+        <h2 th:text="${editMode} ? 'Edit Staff' : 'Add New Staff'">
+            Add New Staff
+        </h2>
+
+        <form th:action="@{/staff/save}"
+              th:object="${staff}" method="post">
+
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-grid">
+
+                <div>
+                    <label for="name">Full Name</label>
+                    <input id="name" type="text" th:field="*{name}"
+                           placeholder="Enter staff name" required>
+                    <div class="error-message"
+                         th:if="${#fields.hasErrors('name')}"
+                         th:errors="*{name}"></div>
+                </div>
+
+                <div>
+                    <label for="email">Email Address</label>
+                    <input id="email" type="email" th:field="*{email}"
+                           placeholder="Enter email address" required>
+                    <div class="error-message"
+                         th:if="${#fields.hasErrors('email')}"
+                         th:errors="*{email}"></div>
+                    <div class="error-message"
+                         th:if="${emailError}" th:text="${emailError}"></div>
+                </div>
+
+                <div>
+                    <label for="phone">Phone Number</label>
+                    <input id="phone" type="tel" th:field="*{phone}"
+                           placeholder="10-digit phone number"
+                           pattern="[0-9]{10}" maxlength="10" required>
+                    <div class="error-message"
+                         th:if="${#fields.hasErrors('phone')}"
+                         th:errors="*{phone}"></div>
+                </div>
+
+                <div>
+                    <label for="role">Role</label>
+                    <input id="role" type="text" th:field="*{role}"
+                           placeholder="Enter staff role" required>
+                    <div class="error-message"
+                         th:if="${#fields.hasErrors('role')}"
+                         th:errors="*{role}"></div>
+                </div>
+
+                <div>
+                    <label for="department">Department</label>
+                    <input id="department" type="text"
+                           th:field="*{department}"
+                           placeholder="Enter department" required>
+                    <div class="error-message"
+                         th:if="${#fields.hasErrors('department')}"
+                         th:errors="*{department}"></div>
+                </div>
+
+                <div>
+                    <label for="salary">Salary</label>
+                    <input id="salary" type="number" step="0.01" min="0"
+                           th:field="*{salary}"
+                           placeholder="Enter salary" required>
+                    <div class="error-message"
+                         th:if="${#fields.hasErrors('salary')}"
+                         th:errors="*{salary}"></div>
+                </div>
+
+            </div>
+
+            <div class="actions">
+                <button type="submit"
+                        th:text="${editMode} ? 'Update Staff' : 'Add Staff'">
+                    Add Staff
+                </button>
+                <a class="btn secondary" th:href="@{/staff}">Reset Form</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2>Search Staff</h2>
+        <form class="search-form" th:action="@{/staff/search}" method="get">
+            <input type="text" name="keyword"
+                   placeholder="Search staff..."
+                   th:value="${keyword}">
+            <button type="submit">Search</button>
+            <a class="btn secondary" th:href="@{/staff}">Show All</a>
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2>Staff List</h2>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                    <th>Department</th>
+                    <th>Salary</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="s : ${staffList}">
+                    <td th:text="${s.id}"></td>
+                    <td th:text="${s.name}"></td>
+                    <td th:text="${s.email}"></td>
+                    <td th:text="${s.phone}"></td>
+                    <td th:text="${s.role}"></td>
+                    <td th:text="${s.department}"></td>
+                    <td th:text="${s.salary}"></td>
+                    <td>
+                        <a class="btn" th:href="@{/staff/view/{id}(id=${s.id})}">
+                            View
+                        </a>
+                        <a class="btn secondary"
+                           th:href="@{/staff/edit/{id}(id=${s.id})}">
+                            Edit
+                        </a>
+                        <a class="btn danger"
+                           th:href="@{/staff/delete/{id}(id=${s.id})}"
+                           onclick="return confirm('Are you sure you want to delete this staff member?');">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(staffList)}">
+                    <td colspan="8">No staff members found.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

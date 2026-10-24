@@ -1,0 +1,843 @@
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.main-navbar {
+    width: 100%;
+    min-height: 70px;
+    background: #111827;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 45px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand a {
+    color: white;
+    text-decoration: none;
+
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.navbar-links a:hover {
+    color: #60a5fa;
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.logout-form {
+    margin: 0;
+}
+
+.logout-btn {
+    border: none;
+    background: #dc2626;
+    color: white;
+
+    padding: 9px 17px;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    background: #b91c1c;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 40px auto;
+}
+
+.container > h1 {
+    margin: 0 0 30px;
+
+    font-size: 32px;
+    color: #111827;
+}
+
+
+/* =========================================================
+   DASHBOARD
+   ========================================================= */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px;
+
+    margin-bottom: 30px;
+}
+
+.dashboard-card {
+    background: white;
+
+    padding: 32px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+
+    transition: 0.25s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.dashboard-card h2 {
+    margin: 0 0 12px;
+
+    font-size: 23px;
+
+    color: #111827;
+}
+
+.dashboard-card p {
+    margin: 8px 0;
+}
+
+.dashboard-count {
+    margin: 10px 0 !important;
+
+    font-size: 50px !important;
+
+    font-weight: bold;
+
+    color: #2563eb;
+}
+
+.dashboard-btn {
+    display: inline-block;
+
+    margin-top: 15px;
+
+    padding: 11px 22px;
+
+    background: #2563eb;
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 7px;
+
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.dashboard-btn:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+   ========================================================= */
+
+.quick-actions {
+    background: white;
+
+    padding: 28px;
+
+    border-radius: 15px;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
+.quick-actions h2 {
+    margin: 0 0 20px;
+
+    font-size: 22px;
+
+    color: #111827;
+}
+
+.quick-action-buttons {
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.primary-btn {
+    display: inline-block;
+
+    padding: 11px 20px;
+
+    background: #2563eb;
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 7px;
+
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.primary-btn:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.form-card,
+.search-card,
+.table-card,
+.details-card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 13px;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.07);
+}
+
+.form-card {
+    margin-bottom: 30px;
+}
+
+.search-card {
+    margin-bottom: 30px;
+}
+
+.table-card {
+    overflow-x: auto;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 7px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 11px 13px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    background: white;
+
+    transition: 0.2s;
+}
+
+.form-group textarea {
+    min-height: 100px;
+
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+.button-area {
+    margin-top: 22px;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search-form {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.search-form select,
+.search-form input {
+    padding: 10px 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+}
+
+.search-form input {
+    min-width: 250px;
+}
+
+.search-form select:focus,
+.search-form input:focus {
+    outline: none;
+
+    border-color: #2563eb;
+}
+
+.search-btn {
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #059669;
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.search-btn:hover {
+    background: #047857;
+}
+
+.reset-btn {
+    padding: 10px 18px;
+
+    border-radius: 7px;
+
+    background: #6b7280;
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.reset-btn:hover {
+    background: #4b5563;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 5px;
+
+    background: white;
+}
+
+thead th {
+    background: #111827;
+
+    color: white;
+
+    padding: 14px;
+
+    text-align: left;
+
+    font-size: 14px;
+}
+
+th {
+    background: #111827;
+
+    color: white;
+
+    padding: 14px;
+
+    text-align: left;
+}
+
+td {
+    padding: 13px 14px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    font-size: 14px;
+}
+
+tbody tr:hover {
+    background: #f9fafb;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+
+.action-btn {
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    margin-right: 4px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.view-btn {
+    background: #2563eb;
+}
+
+.view-btn:hover {
+    background: #1d4ed8;
+}
+
+.edit-btn {
+    background: #f59e0b;
+}
+
+.edit-btn:hover {
+    background: #d97706;
+}
+
+.delete-btn {
+    background: #dc2626;
+}
+
+.delete-btn:hover {
+    background: #b91c1c;
+}
+
+
+/* =========================================================
+   DETAILS PAGE
+   ========================================================= */
+
+.details-card {
+    max-width: 800px;
+
+    margin: 0 auto;
+}
+
+.details-card h2 {
+    margin-top: 0;
+
+    margin-bottom: 25px;
+
+    color: #111827;
+}
+
+.details-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+.detail-item {
+    padding: 15px;
+
+    background: #f9fafb;
+
+    border-radius: 8px;
+
+    border: 1px solid #e5e7eb;
+}
+
+.detail-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #6b7280;
+}
+
+.detail-value {
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: #111827;
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+   ========================================================= */
+
+.success-message {
+    margin-bottom: 20px;
+
+    padding: 12px 18px;
+
+    border-radius: 8px;
+
+    background: #dcfce7;
+
+    border: 1px solid #86efac;
+
+    color: #166534;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
+
+.error-message {
+    margin-top: 5px;
+
+    color: #dc2626;
+
+    font-size: 13px;
+}
+
+.error {
+    color: #dc2626;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   CANCEL BUTTON
+   ========================================================= */
+
+.cancel-btn {
+    display: inline-block;
+
+    margin-left: 8px;
+
+    padding: 10px 20px;
+
+    border-radius: 7px;
+
+    background: #6b7280;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.cancel-btn:hover {
+    background: #4b5563;
+}
+
+
+/* =========================================================
+   COMMON BUTTON
+   ========================================================= */
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .main-navbar {
+        flex-direction: column;
+
+        justify-content: center;
+
+        gap: 15px;
+
+        padding: 18px;
+    }
+
+    .navbar-links {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 15px;
+    }
+
+    .container {
+        width: 94%;
+
+        margin: 25px auto;
+    }
+
+    .container > h1 {
+        font-size: 26px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-form {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .search-form input,
+    .search-form select,
+    .search-btn,
+    .reset-btn {
+        width: 100%;
+    }
+
+    .quick-action-buttons {
+        flex-direction: column;
+    }
+
+    .primary-btn {
+        text-align: center;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .dashboard-card {
+        padding: 22px;
+    }
+
+    .dashboard-count {
+        font-size: 40px !important;
+    }
+
+    .form-card,
+    .search-card,
+    .table-card,
+    .details-card {
+        padding: 18px;
+    }
+
+    .navbar-brand a {
+        font-size: 20px;
+    }
+
+
+    /* ================= RECENT RESIDENTS ================= */
+
+    .recent-residents {
+        background: #ffffff;
+        margin-top: 30px;
+        padding: 28px;
+        border: 1px solid #e5e7eb;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    }
+
+    .recent-residents h2 {
+        margin-top: 0;
+        margin-bottom: 22px;
+        color: #111827;
+    }
+
+    .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        margin-bottom: 22px;
+    }
+
+    .recent-residents table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+    }
+
+    .recent-residents th,
+    .recent-residents td {
+        padding: 15px 18px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .recent-residents th {
+        background: #f3f6fb;
+        color: #1f2937;
+        font-weight: 700;
+    }
+
+    .recent-residents tbody tr:hover {
+        background: #f8faff;
+    }
+
+    .recent-residents .primary-btn {
+        display: inline-block;
+        margin-top: 8px;
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+        .recent-residents {
+            padding: 16px;
+        }
+
+        .recent-residents th,
+        .recent-residents td {
+            padding: 12px;
+            white-space: nowrap;
+        }
+    }
+    /* ================= DEPARTMENT SUMMARY ================= */
+
+    .department-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 16px 12px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .department-row:last-child {
+        border-bottom: none;
+    }
+
+    .department-count {
+        background: #eff6ff;
+        color: #2563eb;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-weight: 700;
+    }
+
+
+}

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Staff Details</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 35px auto;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .details-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .details-row {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .details-row:last-child {
+            border-bottom: none;
+        }
+
+        .details-label {
+            font-weight: bold;
+            color: #4b5563;
+        }
+
+        .details-value {
+            color: #111827;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 7px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            background: #6b7280;
+        }
+
+        .edit-btn {
+            background: #16a34a;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 95%;
+            }
+
+            .details-row {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- REUSABLE NAVBAR -->
+
+<div th:replace="~{fragments/navbar :: navbar}">
+</div>
+
+
+<div class="container">
+
+    <h1 class="page-title">
+        Staff Details
+    </h1>
+
+
+    <div class="details-card">
+
+
+        <!-- ID -->
+
+        <div class="details-row">
+
+            <div class="details-label">
+                Staff ID
+            </div>
+
+            <div class="details-value"
+                 th:text="${staff.id}">
+                1
+            </div>
+
+        </div>
+
+
+        <!-- NAME -->
+
+        <div class="details-row">
+
+            <div class="details-label">
+                Name
+            </div>
+
+            <div class="details-value"
+                 th:text="${staff.name}">
+                John
+            </div>
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="details-row">
+
+            <div class="details-label">
+                Email
+            </div>
+
+            <div class="details-value"
+                 th:text="${staff.email}">
+                john@example.com
+            </div>
+
+        </div>
+
+
+        <!-- PHONE -->
+
+        <div class="details-row">
+
+            <div class="details-label">
+                Phone
+            </div>
+
+            <div class="details-value"
+                 th:text="${staff.phone}">
+                9876543210
+            </div>
+
+        </div>
+
+
+        <!-- ROLE -->
+
+        <div class="details-row">
+
+            <div class="details-label">
+                Role
+            </div>
+
+            <div class="details-value"
+                 th:text="${staff.role}">
+                Manager
+            </div>
+
+        </div>
+
+
+        <!-- DEPARTMENT -->
+
+        <div class="details-row">
+
+            <div class="details-label">
+                Department
+            </div>
+
+            <div class="details-value"
+                 th:text="${staff.department}">
+                Security
+            </div>
+
+        </div>
+
+
+        <!-- SALARY -->
+
+        <div class="details-row">
+
+            <div class="details-label">
+                Salary
+            </div>
+
+            <div class="details-value"
+                 th:text="${staff.salary}">
+                30000
+            </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+            <a href="/staff"
+               class="btn back-btn">
+                Back to Staff
+            </a>
+
+            <a th:href="@{/staff/edit/{id}(id=${staff.id})}"
+               class="btn edit-btn">
+                Edit Staff
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,394 @@
+```html
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Management Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .navbar {
+            background: #172554;
+            color: white;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            color: #93c5fd;
+        }
+
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 9px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: 35px auto;
+            padding: 0 22px;
+        }
+
+        .welcome-section {
+            margin-bottom: 28px;
+        }
+
+        .welcome-section h1 {
+            font-size: 29px;
+            color: #172554;
+            margin-bottom: 9px;
+        }
+
+        .welcome-section p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 3px 14px rgba(15, 23, 42, 0.06);
+            border: 1px solid #e5eaf2;
+            transition: transform 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 15px;
+            margin-bottom: 14px;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #172554;
+        }
+
+        .stat-description {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+
+        .panel {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 3px 14px rgba(15, 23, 42, 0.06);
+            border: 1px solid #e5eaf2;
+            min-width: 0;
+        }
+
+        .panel h2 {
+            font-size: 19px;
+            color: #172554;
+            margin-bottom: 20px;
+        }
+
+        .department-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .department-item:last-child {
+            border-bottom: none;
+        }
+
+        .department-name {
+            color: #334155;
+            overflow-wrap: anywhere;
+        }
+
+        .department-count {
+            background: #dbeafe;
+            color: #1d4ed8;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .empty-message {
+            color: #64748b;
+            padding: 15px 0;
+            font-size: 14px;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+        }
+
+        thead {
+            background: #f1f5f9;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e5eaf2;
+            font-size: 14px;
+        }
+
+        th {
+            color: #475569;
+            font-weight: bold;
+        }
+
+        td {
+            color: #334155;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+
+        .view-link {
+            display: inline-block;
+            color: #1d4ed8;
+            background: #dbeafe;
+            text-decoration: none;
+            padding: 7px 11px;
+            border-radius: 5px;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .view-link:hover {
+            background: #bfdbfe;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .action-link {
+            display: inline-block;
+            background: #1d4ed8;
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .action-link:hover {
+            background: #1e40af;
+        }
+
+        .action-link.secondary {
+            background: #0f766e;
+        }
+
+        .action-link.secondary:hover {
+            background: #115e59;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 15px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                padding: 18px 22px;
+            }
+
+            .container {
+                margin-top: 25px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-section h1 {
+                font-size: 24px;
+            }
+
+            .stat-number {
+                font-size: 31px;
+            }
+
+            .panel {
+                padding: 17px;
+            }
+
+            .nav-links {
+                gap: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="brand">Resident & Staff Management</div>
+
+    <div class="nav-links">
+        <a th:href="@{/}">Dashboard</a>
+        <a th:href="@{/residents}">Residents</a>
+        <a th:href="@{/staff}">Staff</a>
+
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<main class="container">
+
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+        <h1>Management Dashboard</h1>
+        <p>
+            Welcome to your management system. Monitor residents, staff
+            and department information from one place.
+        </p>
+    </section>
+
+    <!-- Statistics Cards -->
+    <section class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-label">Total Residents</div>
+
+            <div class="stat-number"
+                 th:text="${residentCount != null ? residentCount : 0}">
+                0
+            </div>
+
+            <div class="stat-description">
+                Residents registered in the system
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Total Staff Members</div>
+
+            <div class="stat-number"
+                 th:text="${staffCount != null ? staffCount : 0}">
+                0
+            </div>
+
+            <div class="stat-description">
+                Staff members registered in the system
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Department Analytics and Recent Residents -->
+    <section class="content-grid">
+
+        <!-- Department Analytics -->
+        <div class="panel">
+            <h2>Staff by Department</h2>
+
+            <div th:if="${departmentCounts != null and !departmentCounts.isEmpty()}">
+
+                <div class="department-item"
+                     th:each="department : ${departmentCounts}">
+
+                    <span class="department-name"
+                          th:text="${department.key}">
+                        Department
+                    </span>
+
+                    <span class="department-count"
+                          th:text="${department.value + ' staff'}">
+                        0 staff
+                    </span>
+
+                </div>
+
+            </div>
+
+            <p class="empty-message"
+               th:if="${departmentCounts == null or departmentCounts.isEmpty()}">
+                No department information
